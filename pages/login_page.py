@@ -2,7 +2,7 @@ import playwright
 import pytest
 from playwright.sync_api import Playwright, Page, expect
 
-class LoginPAge:
+class LoginPage:
     def __init__(self, page:Page):
         self.page = page
         self.new_user_name = page.get_by_role("textbox", name="Name")
@@ -13,8 +13,8 @@ class LoginPAge:
         self.login_button = page.get_by_role("button", name="Login")
 
     def new_user_signup(self, name, email_address):
-        self.name.fill(name)
-        self.email.fill(email_address)
+        self.new_user_name.fill(name)
+        self.new_user_email.fill(email_address)
         self.signup_button.click()
 
         expect(self.page).to_have_url("https://automationexercise.com/signup")
