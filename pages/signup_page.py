@@ -31,7 +31,9 @@ class SignupPage:
         self.user_phone = page.get_by_role("textbox", name="Mobile Number *")
     
         self.create_account_button = page.get_by_role("button", name="Create Account")
-
+        self.continue_button = page.get_by_role("link", name="Continue")
+        self.logout_button = page.get_by_role("link", name=" Logout")
+        self.delete_account_button = page.get_by_role("listitem").filter(has_text="Delete Account")
 
     def set_user_title(self, title):
         if title == 'Mr.':
@@ -72,3 +74,19 @@ class SignupPage:
         expect(self.page).to_have_url("https://automationexercise.com/account_created")
         expect(self.page.get_by_text("Account Created!")).to_be_visible()
          
+    def click_continue_button(self):
+        self.continue_button.click()
+        expect(self.page).to_have_url("https://automationexercise.com/")
+        expect(self.logout_button).to_be_visible()
+        
+    def delete_account(self):
+        self.delete_account_button.click()
+        expect(self.page).to_have_url("https://automationexercise.com/delete_account")
+        expect(self.page.get_by_text("Account Deleted!")).to_be_visible()
+
+
+    def logout(self):
+        self.logout_button.click()
+        expect(self.page).to_have_url("https://automationexercise.com/login")
+
+        

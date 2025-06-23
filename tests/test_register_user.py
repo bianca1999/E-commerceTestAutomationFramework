@@ -9,7 +9,7 @@ def test_register_user(page):
     home_page.go_to_signup_login_page()
 
     login_page = LoginPage(page)
-    login_page.new_user_signup("Bianca", "calancea.bianca15@gmail.com")
+    login_page.new_user_signup("Bianca", "calancea.bianca10@gmail.com")
 
     signup_page = SignupPage(page)
     signup_page.set_user_title("Mrs")
@@ -31,3 +31,6 @@ def test_register_user(page):
                                           "Perth",
                                           "6104",
                                           "0422569234")
+    
+    signup_page.click_continue_button()
+    signup_page.delete_account()
