@@ -24,3 +24,4 @@ class HomePage:
         self.page.get_by_role("link", name=" Signup / Login").click()
         expect(self.page).to_have_url("https://automationexercise.com/login")
         expect(self.page.get_by_role("heading", name="New User Signup!")).to_be_visible()
+        expect(self.page.get_by_role("heading", name="Login to your account")).to_be_visible()

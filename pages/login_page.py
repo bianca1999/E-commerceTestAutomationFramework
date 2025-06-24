@@ -20,9 +20,19 @@ class LoginPage:
         expect(self.page).to_have_url("https://automationexercise.com/signup")
         expect(self.page.get_by_text("Enter Account Information")).to_be_visible()
 
-    def existing_user_login(self, email, password):
+    def user_login_correct_credentials(self, email, password):
         self.existing_user_email.fill(email)
         self.existing_user_password.fill(password)
         self.login_button.click()
+
+        expect(self.page.get_by_text(" Logged in as ")).to_be_visible()
+
+    def user_login_incorrect_credentials(self, email, password):
+        self.existing_user_email.fill(email)
+        self.existing_user_password.fill(password)
+        self.login_button.click()
+
+        expect(self.page.get_by_text("Your email or password is incorrect!")).to_be_visible()
+
 
 

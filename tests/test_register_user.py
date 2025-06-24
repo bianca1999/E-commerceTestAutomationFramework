@@ -3,10 +3,8 @@ from pages.login_page import LoginPage
 from pages.signup_page import SignupPage
 
 
-def test_register_user(page):
-    home_page = HomePage(page)
-    home_page.navigate()
-    home_page.go_to_signup_login_page()
+def test_register_user(page, go_to_signup_login):
+    go_to_signup_login()
 
     login_page = LoginPage(page)
     login_page.new_user_signup("Bianca", "calancea.bianca10@gmail.com")

@@ -78,15 +78,17 @@ class SignupPage:
         self.continue_button.click()
         expect(self.page).to_have_url("https://automationexercise.com/")
         expect(self.logout_button).to_be_visible()
-        
-    def delete_account(self):
-        self.delete_account_button.click()
-        expect(self.page).to_have_url("https://automationexercise.com/delete_account")
-        expect(self.page.get_by_text("Account Deleted!")).to_be_visible()
-
-
+        expect(self.page.get_by_text(" Logged in as ")).to_be_visible()
+    
     def logout(self):
         self.logout_button.click()
         expect(self.page).to_have_url("https://automationexercise.com/login")
 
+        
+'''    def delete_account(self):
+        self.delete_account_button.click()
+        expect(self.page).to_have_url("https://automationexercise.com/delete_account")
+        expect(self.page.get_by_text("Account Deleted!")).to_be_visible()
+'''        
+    
         
