@@ -7,6 +7,7 @@ class HomePage:
         self.cart_button = page.get_by_role("link", name=" Cart")
         self.signup_login_button = page.get_by_role("link", name=" Signup / Login")
         self.contact_us_button = page.get_by_role("link", name=" Contact us")
+        self.test_cases_button = page.get_by_role("link", name=" Test Cases", exact=True)
 
 
     def navigate(self):
@@ -27,6 +28,10 @@ class HomePage:
         expect(self.page).to_have_url("https://automationexercise.com/login")
         expect(self.page.get_by_role("heading", name="New User Signup!")).to_be_visible()
         expect(self.page.get_by_role("heading", name="Login to your account")).to_be_visible()
+
+    def go_to_test_cases_page(self):
+        self.test_cases_button.click()
+        expect(self.page).to_have_url("https://automationexercise.com/test_cases")
 
     def go_to_contact_us_page(self):
         self.contact_us_button.click()
