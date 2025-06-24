@@ -10,7 +10,7 @@ def go_to_signup_login(page):
         login_page.go_to_signup_login_page()
     return _go_to_signup_login
 
-
+@pytest.fixture
 def delete_account(page):
     def _delete_account():
         page.get_by_role("listitem").filter(has_text="Delete Account").click()
