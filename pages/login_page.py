@@ -11,6 +11,7 @@ class LoginPage:
         self.existing_user_email = page.locator("form").filter(has_text="Login").get_by_placeholder("Email Address")
         self.existing_user_password = page.get_by_role("textbox", name="Password")
         self.login_button = page.get_by_role("button", name="Login")
+        
 
     def new_user_signup(self, name, email_address):
         self.new_user_name.fill(name)

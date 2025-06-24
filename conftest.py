@@ -11,6 +11,13 @@ def go_to_signup_login(page):
     return _go_to_signup_login
 
 @pytest.fixture
+def logout_user(page):
+    def _logout_user():
+       page.get_by_role("listitem").filter(has_text="Logout").click()
+       expect(page).to_have_url("https://automationexercise.com/login")
+    return _logout_user
+        
+@pytest.fixture
 def delete_account(page):
     def _delete_account():
         page.get_by_role("listitem").filter(has_text="Delete Account").click()
