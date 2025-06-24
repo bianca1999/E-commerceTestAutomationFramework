@@ -3,11 +3,11 @@ from pages.login_page import LoginPage
 from pages.signup_page import SignupPage
 
 
-def test_register_user(page, go_to_signup_login, delete_account):
+def test_user_register_correct_credentials(page, go_to_signup_login, delete_account):
     go_to_signup_login()
 
     login_page = LoginPage(page)
-    login_page.new_user_signup("Bianca", "calancea.bianca9@gmail.com")
+    login_page.user_register_correct_credentials("Bianca", "calancea.bianca9@gmail.com")
 
     signup_page = SignupPage(page)
     signup_page.set_user_title("Mrs")
@@ -32,3 +32,10 @@ def test_register_user(page, go_to_signup_login, delete_account):
     
     signup_page.click_continue_button()
     delete_account()
+
+
+def test_user_register_incorrect_credentials(page, go_to_signup_login):
+    go_to_signup_login()
+
+    login_page = LoginPage(page)
+    login_page.user_register_incorrect_credentials("Bianca", "bianca@gmail")

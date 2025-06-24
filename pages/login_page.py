@@ -11,15 +11,23 @@ class LoginPage:
         self.existing_user_email = page.locator("form").filter(has_text="Login").get_by_placeholder("Email Address")
         self.existing_user_password = page.get_by_role("textbox", name="Password")
         self.login_button = page.get_by_role("button", name="Login")
-        
 
-    def new_user_signup(self, name, email_address):
+
+    def user_register_correct_credentials(self, name, email_address):
         self.new_user_name.fill(name)
         self.new_user_email.fill(email_address)
         self.signup_button.click()
 
         expect(self.page).to_have_url("https://automationexercise.com/signup")
         expect(self.page.get_by_text("Enter Account Information")).to_be_visible()
+
+    def user_register_incorrect_credentials(self, name, email_address):
+        self.new_user_name.fill(name)
+        self.new_user_email.fill(email_address)
+        self.signup_button.click()
+
+        expect(self.page.get_by_text("Email Address already exist!")).to_be_visible()
+
 
     def user_login_correct_credentials(self, email, password):
         self.existing_user_email.fill(email)
