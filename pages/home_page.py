@@ -17,6 +17,7 @@ class HomePage:
     def go_to_products_page(self):
         self.products_button.click()
         expect(self.page).to_have_url("https://automationexercise.com/products")
+        expect(self.page.get_by_text("All Products")).to_be_visible()
 
     def go_to_cart_page(self):
         self.cart_button.click()
