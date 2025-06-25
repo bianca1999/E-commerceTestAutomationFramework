@@ -25,3 +25,5 @@ def delete_account(page):
         expect(page.get_by_text("Account Deleted!")).to_be_visible()
     return _delete_account
 
+
+

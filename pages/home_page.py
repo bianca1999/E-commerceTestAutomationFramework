@@ -8,6 +8,9 @@ class HomePage:
         self.signup_login_button = page.get_by_role("link", name=" Signup / Login")
         self.contact_us_button = page.get_by_role("link", name=" Contact us")
         self.test_cases_button = page.get_by_role("link", name=" Test Cases", exact=True)
+        self.subscription_input = page.locator("//*[@id='susbscribe_email']")
+        self.subscribe_button = page.locator('//*[@id="subscribe"]')
+        self.success_subscribe_message = page.locator('//*[@id="success-subscribe"]/div')
 
 
     def navigate(self):
@@ -38,3 +41,8 @@ class HomePage:
         self.contact_us_button.click()
         expect(self.page).to_have_url("https://automationexercise.com/contact_us")
         expect(self.page.get_by_role("heading", name="Get In Touch")).to_be_visible()
+
+    def verify_subscription(self, email_address):
+        self.subscription_input.fill(email_address)
+        self.subscribe_button.click()
+        expect(self.success_subscribe_message).to_be_visible()
