@@ -19,6 +19,24 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest playwright pytest-playwright pytest-html
         python -m playwright install
+    - name: 🧪 Run tests with Allure
+      run: |
+        pytest --alluredir=reports/allure-results
+
+    - name: 🧰 Install Allure commandline
+      uses: addnab/docker-run-action@v3
+      with:
+        image: frankescobar/allure-docker-service
+        options: -v ${{ github.workspace }}/reports:/app/allure-results
+        run: |
+          allure generate /app/allure-results -o /app/allure-report --clean
+
+    - name: 💾 Upload Allure Report as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: reports/allure-report
+        
     - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
     - name: Run your tests
