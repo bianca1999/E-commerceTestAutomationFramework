@@ -7,7 +7,7 @@ class CartPage:
         self.subscribe_button = page.locator('//*[@id="subscribe"]')
         self.success_subscribe_message = page.locator('//*[@id="success-subscribe"]/div')
         self.product_locator = 0
-        self.prouct_price = 0
+        self.product_price = 0
         self.product_quantity = 0
         self.product_total_price = 0
 
@@ -26,4 +26,8 @@ class CartPage:
         expect(self.product_price).to_have_text(product_price)
         expect(self.product_quantity).to_have_text(product_quantity)
         expect(self.product_total_price).to_have_text(product_total_price)
+    
+    def test_total_price_for_a_product(self, product_id, product_total_price):
+        self.product_total_price = self.page.locator(f"//*[@id='product-{product_id}']/td[5]/p")
         
+        expect(self.product_total_price).to_have_text(product_total_price)
