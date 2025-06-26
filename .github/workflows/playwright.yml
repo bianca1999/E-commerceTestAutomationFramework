@@ -17,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest playwright pytest-playwright pytest-html
+        pip install pytest playwright pytest-playwright pytest-html allure-pytest
         python -m playwright install
     - name: 🧪 Run tests with Allure
       run: |
