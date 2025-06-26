@@ -4,7 +4,7 @@ from pages.cart_page import CartPage
 from pages.login_page import LoginPage
 from pages.payment_page import PaymentPage
 
-def test_place_order_with_register_while_checkout(page):
+def test_place_order_with_login_while_checkout(page):
     home_page = HomePage(page)
     home_page.navigate()
     home_page.go_to_products_page()

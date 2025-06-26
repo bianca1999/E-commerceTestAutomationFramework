@@ -17,6 +17,7 @@ class CartPage:
         self.review_your_order_section = page.get_by_text("Review Your Order")
         self.message_area = page.locator('//*[@id="ordermsg"]/textarea')
         self.place_order_button = page.get_by_text('Place Order')
+        self.delete_product = 0
 
     def verify_subscription(self, email_address):
         self.subscription_input.fill(email_address)
@@ -59,3 +60,9 @@ class CartPage:
         self.place_order_button.click()
         expect(self.page).to_have_url("https://automationexercise.com/payment")
 
+    def remove_a_product_from_the_cart(self, product_id):
+        self.delete_product = self.page.locator(f"//*[@id='product-{product_id}']/td[6]/a/i")
+        self.delete_product.click()
+        self.product_locator = self.page.locator(f"//*[@id='product-{product_id}']")
+
+        expect(self.product_locator).not_to_be_visible()

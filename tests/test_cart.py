@@ -42,3 +42,18 @@ def test_verify_product_quantity_in_cart(page, product_id):
 
     cart_page = CartPage(page)
     cart_page.test_total_price_for_a_product(product_id, total_price)
+
+def test_remove_product_from_cart(page):
+    home_page = HomePage(page)
+    home_page.navigate()
+    home_page.go_to_products_page()
+
+    products_page = ProductsPage(page)
+    products_page.add_product_to_cart(1)
+    products_page.continue_shopping()
+    products_page.add_product_to_cart(2)
+    products_page.view_cart()
+
+    cart_page = CartPage(page)
+    cart_page.remove_a_product_from_the_cart(1)
+    
