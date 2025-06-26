@@ -9,7 +9,9 @@ class ProductsPage:
         self.searched_products = page.get_by_role("heading", name = "Searched Products")
         self.continue_shopping_button = page.locator('//*[@id="cartModal"]/div/div/div[3]/button')
         self.view_cart_button = page.locator('//*[@id="cartModal"]/div/div/div[2]/p[2]/a')
-        
+        self.category_panel = page.locator('#accordian')
+        self.women_category = page.get_by_role("link", name=" Women")
+        self.men_categoty = page.get_by_role("link", name=" Men")
         
 
     def check_product_list_to_be_visible(self):
@@ -39,3 +41,20 @@ class ProductsPage:
 
     def view_cart(self):
         self.view_cart_button.click()
+
+    def category_panel_to_be_visible(self):
+        expect(self.category_panel).to_be_visible
+
+    def expand_category(self, category):
+        if category == "Women":
+            self.women_category.click()
+            expect(self.page.locator('#Women > div')).to_be_visible()
+        elif category == "Men":
+            self.men_categoty.click()
+            expect(self.page.locator('#Men > div')).to_be_visible()
+
+
+    def click_subcategory(self, category, subcategory):
+        self.page.get_by_role('link', name = f"{subcategory}").click()
+        expect(self.page.get_by_text(f"{category} - {subcategory} Products")).to_be_visible()
+        

@@ -22,3 +22,17 @@ def test_search_a_product(page):
 
     products_page = ProductsPage(page)
     products_page.search_a_product("men")
+
+def test_category(page):
+    home_page = HomePage(page)
+    home_page.navigate()
+    home_page.go_to_products_page()
+    
+    products_page = ProductsPage(page)
+    products_page.category_panel_to_be_visible()
+    products_page.expand_category("Women")
+    products_page.click_subcategory("Women", "Dress")
+    products_page.expand_category("Men")
+    products_page.click_subcategory("Men", "Jeans")
+
+
