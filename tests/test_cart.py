@@ -41,4 +41,4 @@ def test_verify_product_quantity_in_cart(page, product_id):
     single_product_page.view_cart()
 
     cart_page = CartPage(page)
-    cart_page.test_total_price_for_a_product(product_id,total_price)
+    cart_page.test_total_price_for_a_product(product_id, total_price)
