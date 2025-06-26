@@ -10,6 +10,7 @@ class ProductsPage:
         self.continue_shopping_button = page.locator('//*[@id="cartModal"]/div/div/div[3]/button')
         self.view_cart_button = page.locator('//*[@id="cartModal"]/div/div/div[2]/p[2]/a')
         self.category_panel = page.locator('#accordian')
+        self.brend_panel = page.locator("css=div.brands-name")
         self.women_category = page.get_by_role("link", name=" Women")
         self.men_categoty = page.get_by_role("link", name=" Men")
         
@@ -43,7 +44,10 @@ class ProductsPage:
         self.view_cart_button.click()
 
     def category_panel_to_be_visible(self):
-        expect(self.category_panel).to_be_visible
+        expect(self.category_panel).to_be_visible()
+
+    def brend_panel_to_be_visible(self):
+        expect(self.brend_panel).to_be_visible()
 
     def expand_category(self, category):
         if category == "Women":
@@ -58,3 +62,6 @@ class ProductsPage:
         self.page.get_by_role('link', name = f"{subcategory}").click()
         expect(self.page.get_by_text(f"{category} - {subcategory} Products")).to_be_visible()
         
+    def click_brand(self, brand):
+        self.page.get_by_role("link", name = f"{brand}").click()
+        expect(self.page.get_by_text(f"Brand - {brand} Products")).to_be_visible()

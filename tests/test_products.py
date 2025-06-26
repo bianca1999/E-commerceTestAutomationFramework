@@ -1,38 +1,60 @@
 from pages.home_page import HomePage
 from pages.all_products_page import ProductsPage
 from pages.single_product_page import Product
-from playwright.sync_api import expect
+import pytest
 
-def test_all_products_to_be_visible(page):
+@pytest.mark.parametrize('product_id', [1, 2, 3, 4])
+def test_products_to_be_visible(page, product_id):
     home_page = HomePage(page)
     home_page.navigate()
     home_page.go_to_products_page()
 
     products_page = ProductsPage(page)
     products_page.check_product_list_to_be_visible()    
-    products_page.view_a_product(1)
+    products_page.view_a_product(product_id)
 
     single_product_page = Product(page)
     single_product_page.check_product_details_to_be_visible()
 
-def test_search_a_product(page):
+
+@pytest.mark.parametrize('product_name', ["men",
+                                          "women", 
+                                          "kids"])
+def test_search_a_product(page, product_name):
     home_page = HomePage(page)
     home_page.navigate()
     home_page.go_to_products_page()
 
     products_page = ProductsPage(page)
-    products_page.search_a_product("men")
+    products_page.search_a_product(product_name)
 
-def test_category(page):
+@pytest.mark.parametrize('category, subcategory', [["Women", "Dress"], 
+                                                   ["Women", "Tops"],
+                                                   ["Women", "Saree"], 
+                                                   ["Men", "Tshirts"],
+                                                   ["Men", "Jeans"]])
+def test_category(page, category, subcategory):
     home_page = HomePage(page)
     home_page.navigate()
     home_page.go_to_products_page()
     
     products_page = ProductsPage(page)
     products_page.category_panel_to_be_visible()
-    products_page.expand_category("Women")
-    products_page.click_subcategory("Women", "Dress")
-    products_page.expand_category("Men")
-    products_page.click_subcategory("Men", "Jeans")
+    products_page.expand_category(category)
+    products_page.click_subcategory(category, subcategory)
 
-
+@pytest.mark.parametrize('brand', ["POLO",
+                                    "H&M", 
+                                    "MADAME", 
+                                    "BABYHUG", 
+                                    "MAST & HARBOUR", 
+                                    "BIBA", 
+                                    "KOOKIE KIDS"])
+def test_brand(page, brand):
+    home_page = HomePage(page)
+    home_page.navigate()
+    home_page.go_to_products_page()
+    
+    products_page = ProductsPage(page)
+    products_page.brend_panel_to_be_visible()
+    products_page.click_brand(brand)
