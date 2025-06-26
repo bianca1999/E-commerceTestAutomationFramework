@@ -32,11 +32,11 @@ jobs:
           allure generate /app/allure-results -o /app/allure-report --clean
 
     - name: 💾 Upload Allure Report as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: allure-report
         path: reports/allure-report
-        
+
     - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
     - name: Run your tests
