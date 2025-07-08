@@ -55,11 +55,5 @@ class SignupPage:
         self.page.get_by_role("link", name="Logout").click()
         expect(self.page).to_have_url("https://automationexercise.com/login")
 
-        
-'''    def delete_account(self):
-        self.delete_account_button.click()
-        expect(self.page).to_have_url("https://automationexercise.com/delete_account")
-        expect(self.page.get_by_text("Account Deleted!")).to_be_visible()
-'''        
-    
+
         

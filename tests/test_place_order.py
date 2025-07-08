@@ -7,20 +7,19 @@ from pages.payment_page import PaymentPage
 def test_place_order_with_login_while_checkout(page):
     home_page = HomePage(page)
     home_page.navigate()
-    home_page.go_to_products_page()
 
-    products_page = ProductsPage(page)
+    products_page = home_page.go_to_products_page()
     products_page.add_product_to_cart(1)
     products_page.continue_shopping()
     products_page.add_product_to_cart(2)
-    products_page.view_cart()
 
-    cart_page = CartPage(page)
+    cart_page = products_page.view_cart()
     cart_page.proceed_to_checkout()
     cart_page.register_or_login_while_checkout()
 
     login_page = LoginPage(page)
-    login_page.user_login_correct_credentials("bianca@gmail",'123456')
+    login_page.user_login("bianca@gmail",'123456')
+    login_page.expect_login_success()
 
     home_page.go_to_cart_page()
     cart_page.proceed_to_checkout()
