@@ -6,7 +6,8 @@ def test_user_register_correct_credentials(page, go_to_signup_login, delete_acco
     go_to_signup_login()
 
     login_page = LoginPage(page)
-    login_page.user_register_correct_credentials("Bianca", "calancea.bianca9@gmail.com")
+    login_page.user_register("Bianca", "calancea.bianca9@gmail.com")
+    login_page.expect_login_success()
 
     signup_page = SignupPage(page)
     signup_page.set_user_title("Mrs")

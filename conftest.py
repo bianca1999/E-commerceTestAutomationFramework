@@ -2,6 +2,14 @@ import pytest
 from pages.home_page import HomePage
 from playwright.sync_api import expect
 
+@pytest.fixture(scope="session")
+def correct_credentials(request):
+    return request.param
+
+@pytest.fixture(scope="session")
+def incorrect_credentials(request):
+    return request.param
+
 @pytest.fixture
 def go_to_signup_login(page):
     def _go_to_signup_login():
