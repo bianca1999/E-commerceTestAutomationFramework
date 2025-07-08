@@ -10,7 +10,7 @@ class LoginPage:
         self.page.locator("form").filter(has_text="Signup").get_by_placeholder("Email Address").fill(email_address)
         self.page.get_by_role("button", name="Signup").click()
 
-    def expect_user_register_success(self):
+    def expect_register_success(self):
         expect(self.page).to_have_url("https://automationexercise.com/signup")
         expect(self.page.get_by_text("Enter Account Information")).to_be_visible()
 

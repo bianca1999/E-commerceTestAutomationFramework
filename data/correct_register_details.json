@@ -1,0 +1,22 @@
+{
+  "correct_register_details" : [
+    {
+      "name" : "Bianca",
+      "email"  : "calancea.bianca9@gmail.com",
+      "title": "Mrs",
+      "password": "password",
+      "birthday": "15",
+      "birth_month": "7",
+      "birth_year": "1999",
+      "last_name" : "Calancea",
+      "company": "Continental",
+      "address1": "Hensman Street",
+      "address2": "Kewdale",
+      "country": "Australia",
+      "state": "WA",
+      "city": "Perth",
+      "zipcode": "6104",
+      "phone": "0422569234"
+  }
+  ]
+}

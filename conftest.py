@@ -3,11 +3,7 @@ from pages.home_page import HomePage
 from playwright.sync_api import expect
 
 @pytest.fixture(scope="session")
-def correct_credentials(request):
-    return request.param
-
-@pytest.fixture(scope="session")
-def incorrect_credentials(request):
+def credentials(request):
     return request.param
 
 @pytest.fixture
