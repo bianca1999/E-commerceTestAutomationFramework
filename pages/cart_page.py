@@ -1,5 +1,8 @@
 from playwright.sync_api import Page, expect
 
+from pages.login_page import LoginPage
+
+
 class CartPage:
     def __init__(self, page:Page):
         self.page = page
@@ -19,11 +22,14 @@ class CartPage:
         expect(self.page.locator(f"//*[@id='product-{product_id}']/td[5]/p")).to_have_text(product_total_price)
 
     def proceed_to_checkout(self):
-        self.page.get_by_role("button", name='Proceed To Checkout').click()
+        self.page.get_by_text('Proceed To Checkout').click()
 
     def register_or_login_while_checkout(self):
         self.page.get_by_role("link", name="Register / Login").click()
         expect(self.page).to_have_url("https://automationexercise.com/login")
+
+        loginPage = LoginPage(self.page)
+        return loginPage
 
     def check_if_address_details_are_visible(self):
         expect(self.page.get_by_text("Address Details")).to_be_visible()

@@ -6,6 +6,10 @@ from playwright.sync_api import expect
 def credentials(request):
     return request.param
 
+@pytest.fixture(scope="session")
+def payment_details(request):
+    return request.param
+
 @pytest.fixture
 def go_to_signup_login(page):
     def _go_to_signup_login():

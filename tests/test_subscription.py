@@ -1,15 +1,21 @@
 from pages.home_page import HomePage
-from pages.cart_page import CartPage
+import pytest
 
-def test_subscription_in_home_page(page):
+@pytest.mark.parametrize('email', ["calancea.bianca15@gmail.com",
+                                   "calancea@gmail.com",
+                                   "petru@gmai.com"
+                                    ])
+def test_subscription_in_home_page(page, email):
     home_page = HomePage(page)
     home_page.navigate()
-    home_page.verify_subscription("calancea.bianca15@gmail.com")
+    home_page.verify_subscription(email)
 
-def test_subscription_in_cart_page(page):
+@pytest.mark.parametrize('email', ["calancea.bianca15@gmail.com",
+                                   "calancea@gmail.com",
+                                   "petru@gmai.com"
+                                    ])
+def test_subscription_in_cart_page(page, email):
     home_page = HomePage(page)
     home_page.navigate()
-    home_page.go_to_cart_page()
-
-    cart_page = CartPage(page)
-    cart_page.verify_subscription("calancea.bianca15@gmail.com")
+    cart_page = home_page.go_to_cart_page()
+    cart_page.verify_subscription(email)

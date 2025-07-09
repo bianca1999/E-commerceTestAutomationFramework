@@ -3,7 +3,7 @@ import os
 import json
 import pytest
 
-with open('../data/contact_us_form_details.json') as ilc:
+with open('./data/contact_us_form_details.json') as ilc:
     contact_us_form_data = json.load(ilc)
     contact_us_form_list = contact_us_form_data['contact_us_form_details']
 

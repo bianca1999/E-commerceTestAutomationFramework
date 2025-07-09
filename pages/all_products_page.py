@@ -59,7 +59,7 @@ class ProductsPage:
             self.page.get_by_role("link", name="Women").click()
             expect(self.page.locator('#Women > div')).to_be_visible()
         elif category == "Men":
-            self.page.get_by_role("link", name="Men").click()
+            self.page.get_by_role("link", name=" Men ", exact=True).click()
             expect(self.page.locator('#Men > div')).to_be_visible()
 
 

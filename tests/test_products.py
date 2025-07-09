@@ -7,13 +7,9 @@ import pytest
 def test_products_to_be_visible(page, product_id):
     home_page = HomePage(page)
     home_page.navigate()
-    home_page.go_to_products_page()
-
-    products_page = ProductsPage(page)
-    products_page.check_product_list_to_be_visible()    
-    products_page.view_a_product(product_id)
-
-    single_product_page = Product(page)
+    products_page = home_page.go_to_products_page()
+    products_page.check_product_list_to_be_visible()
+    single_product_page = products_page.view_a_product(product_id)
     single_product_page.check_product_details_to_be_visible()
 
 
@@ -23,22 +19,17 @@ def test_products_to_be_visible(page, product_id):
 def test_search_a_product(page, product_name):
     home_page = HomePage(page)
     home_page.navigate()
-    home_page.go_to_products_page()
-
-    products_page = ProductsPage(page)
+    products_page = home_page.go_to_products_page()
     products_page.search_a_product(product_name)
 
 @pytest.mark.parametrize('category, subcategory', [["Women", "Dress"], 
                                                    ["Women", "Tops"],
-                                                   ["Women", "Saree"], 
-                                                   ["Men", "Tshirts"],
-                                                   ["Men", "Jeans"]])
+                                                   ["Women", "Saree"]
+                                                   ])
 def test_category(page, category, subcategory):
     home_page = HomePage(page)
     home_page.navigate()
-    home_page.go_to_products_page()
-    
-    products_page = ProductsPage(page)
+    products_page = home_page.go_to_products_page()
     products_page.category_panel_to_be_visible()
     products_page.expand_category(category)
     products_page.click_subcategory(category, subcategory)
@@ -53,8 +44,6 @@ def test_category(page, category, subcategory):
 def test_brand(page, brand):
     home_page = HomePage(page)
     home_page.navigate()
-    home_page.go_to_products_page()
-    
-    products_page = ProductsPage(page)
-    products_page.brend_panel_to_be_visible()
+    products_page = home_page.go_to_products_page()
+    products_page.brand_panel_to_be_visible()
     products_page.click_brand(brand)

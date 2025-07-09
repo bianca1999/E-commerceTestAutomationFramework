@@ -1,0 +1,11 @@
+{
+  "payment_details" : [
+    {
+      "name_on_card" : "Bianca Calancea",
+      "card_number"  : "123456789",
+      "cvc": "123",
+      "exp_month": "12",
+      "exp_year": "2028"
+  }
+  ]
+}

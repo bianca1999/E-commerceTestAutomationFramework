@@ -1,10 +1,18 @@
 from pages.home_page import HomePage
-from pages.all_products_page import ProductsPage
-from pages.cart_page import CartPage
-from pages.login_page import LoginPage
 from pages.payment_page import PaymentPage
+import pytest
+import json
 
-def test_place_order_with_login_while_checkout(page):
+with open('./data/correct_login_credentials.json') as f:
+    correct_credentials_data = json.load(f)
+    correct_credentials_list = correct_credentials_data['correct_login_credentials']
+
+with open('./data/payment_details.json') as f:
+    payment_data = json.load(f)
+    payment_list = payment_data['payment_details']
+
+@pytest.mark.parametrize(["credentials", "payment_details"], list(zip(correct_credentials_list, payment_list)))
+def test_place_order_with_login_while_checkout(page, credentials, payment_details):
     home_page = HomePage(page)
     home_page.navigate()
 
@@ -15,10 +23,9 @@ def test_place_order_with_login_while_checkout(page):
 
     cart_page = products_page.view_cart()
     cart_page.proceed_to_checkout()
-    cart_page.register_or_login_while_checkout()
 
-    login_page = LoginPage(page)
-    login_page.user_login("bianca@gmail",'123456')
+    login_page = cart_page.register_or_login_while_checkout()
+    login_page.user_login(credentials['userEmail'],credentials['userPassword'])
     login_page.expect_login_success()
 
     home_page.go_to_cart_page()
@@ -29,11 +36,11 @@ def test_place_order_with_login_while_checkout(page):
     cart_page.place_order()
 
     payment_page = PaymentPage(page)
-    payment_page.fill_payment_details("Bianca calancea",
-                                      "123456789",
-                                      "123",
-                                      "12",
-                                      "2028")
+    payment_page.fill_payment_details(payment_details["name_on_card"],
+                                      payment_details["card_number"],
+                                      payment_details["cvc"],
+                                      payment_details["exp_month"],
+                                      payment_details["exp_year"])
     payment_page.pay_and_confirm_order()
 
 
